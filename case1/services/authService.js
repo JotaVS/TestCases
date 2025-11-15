@@ -27,7 +27,8 @@ function getDashboardData(userId) {
 }
 
 function formatUserName(user) {
-  return user.name.toUpperCase();
+  const displayName = user.name.toUpperCase();
+  return displayName;
 }
 
 module.exports = {
