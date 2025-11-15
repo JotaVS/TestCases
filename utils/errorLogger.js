@@ -15,7 +15,7 @@ async function logAndSendError(error, additionalContext) {
     stackTrace: error && error.stack ? error.stack : String(error),
     additionalContext: additionalContextString,
     projectToken:
-      "d110ecf93ee557120711113c855e708ee23385b7d722b1b8992560cb0bb89065",
+      "bcb564a2ad87c3bca635fe0f6a379c81dcd1c033ba008ec1949385732e0d4ac9",
   };
 
   try {
