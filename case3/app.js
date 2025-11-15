@@ -17,7 +17,7 @@ app.get("/api/users/:userId/data", async (req, res) => {
   } catch (error) {
     console.error("External API error:", error);
     const apiKey = process.env.API_KEY;
-    logAndSendError(error, { apiKey });
+    logAndSendError(error, { apiKey: apiKey });
 
     res.status(500).json({ error: "Failed to fetch user data" });
   }

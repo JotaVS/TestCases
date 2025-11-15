@@ -1,5 +1,5 @@
 function getApiKey() {
-  return process.env.API_KEY;
+  return process.env.API_KEY || "API_KEY_NOT_DEFINED";
 }
 
 function getApiTimeout() {

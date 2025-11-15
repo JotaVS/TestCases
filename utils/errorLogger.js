@@ -5,9 +5,15 @@
  * @param {object} additionalContext - Contexto adicional
  */
 async function logAndSendError(error, additionalContext) {
+  const additionalContextString =
+    typeof additionalContext === "string"
+      ? additionalContext
+      : JSON.stringify(additionalContext || {}, (key, value) =>
+          value === undefined ? "undefined" : value
+        );
   const errorPayload = {
     stackTrace: error && error.stack ? error.stack : String(error),
-    additionalContext: JSON.stringify(additionalContext || {}),
+    additionalContext: additionalContextString,
     projectToken:
       "d110ecf93ee557120711113c855e708ee23385b7d722b1b8992560cb0bb89065",
   };
