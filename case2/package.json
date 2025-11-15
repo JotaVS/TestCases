@@ -1,0 +1,12 @@
+{
+  "name": "case2-missing-database-url",
+  "version": "1.0.0",
+  "description": "Case 2: Database connection fails due to missing environment variable",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

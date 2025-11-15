@@ -1,0 +1,12 @@
+{
+  "name": "case1-database-typo",
+  "version": "1.0.0",
+  "description": "Case 1: Module not found due to typo in require path",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
