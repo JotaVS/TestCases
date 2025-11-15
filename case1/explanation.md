@@ -1,6 +1,6 @@
-# Database Connection API
+# Auth Middleware API
 
-Sistema de gerenciamento de conexões com banco de dados.
+Sistema de autenticação com middleware para APIs.
 
 ## Como executar
 
@@ -10,22 +10,33 @@ npm start
 
 ## Teste que gera o erro
 
-Tente buscar registros de usuários:
+1. Primeiro faça login (vai funcionar):
 
 ```bash
-curl http://localhost:4001/api/users
+curl -X POST http://localhost:4001/api/auth/login -H "Content-Type: application/json" -d "{\"username\":\"admin\",\"password\":\"123456\"}"
+```
+
+2. Depois tente acessar o dashboard com um userId inválido (vai gerar erro):
+
+```bash
+curl http://localhost:4001/api/dashboard -H "user-id: 999"
 ```
 
 ## Detalhes do erro
 
-- **Tipo**: Error (MODULE_NOT_FOUND)
-- **Localização**: `services/userService.js`, linha 1
-- **Causa raiz**: `require("../datbase/connection")` tem typo no caminho (datbase ao invés de database)
+- **Tipo**: TypeError
+- **Localização**: `services/authService.js`, linha 26 (função `formatUserName`)
+- **Causa raiz**: O objeto `user` é null quando o userId não existe, e a função tenta acessar `user.name`
 
 ## Como solucionar
 
-Corrija o typo no caminho do require:
+Adicione validação antes de acessar propriedades do objeto:
 
 ```javascript
-const dbConnection = require("../database/connection");
+function formatUserName(user) {
+  if (!user) {
+    return "Unknown User";
+  }
+  return user.name.toUpperCase();
+}
 ```

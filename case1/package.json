@@ -1,12 +1,22 @@
 {
-  "name": "case1-database-typo",
+  "name": "auth-middleware-api",
   "version": "1.0.0",
-  "description": "Case 1: Module not found due to typo in require path",
-  "main": "app.js",
+  "description": "Authentication middleware API",
+  "main": "server.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node server.js"
   },
+  "keywords": [
+    "auth",
+    "api",
+    "middleware"
+  ],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
     "express": "^4.18.2"
+  },
+  "volta": {
+    "node": "18.20.0"
   }
 }

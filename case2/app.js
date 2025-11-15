@@ -1,35 +1,51 @@
 const express = require("express");
 const { logAndSendError } = require("../utils/errorLogger");
-const dbService = require("./services/dbConnection");
+const externalApiService = require("./services/externalApiService");
 
 const app = express();
 app.use(express.json());
 
-app.get("/api/health", (req, res) => {
+app.get("/api/users/:userId/data", async (req, res) => {
   try {
-    const status = dbService.checkHealth();
-    res.json({ status });
+    const { userId } = req.params;
+    const userData = await externalApiService.fetchUserData(userId);
+
+    res.json({
+      userId,
+      data: userData,
+    });
   } catch (error) {
-    console.error("Health check error:", error);
-    logAndSendError(error, __dirname);
-    res.status(500).json({ error: "Database connection failed" });
+    console.error("External API error:", error);
+
+    logAndSendError(error);
+
+    res.status(500).json({ error: "Failed to fetch user data" });
   }
 });
 
-app.get("/api/query", (req, res) => {
+app.post("/api/notifications/send", async (req, res) => {
   try {
-    const sql = req.query.sql || "SELECT 1";
-    const result = dbService.executeQuery(sql);
-    res.json(result);
+    const { message, recipient } = req.body;
+    const result = await externalApiService.sendNotification(
+      message,
+      recipient
+    );
+
+    res.json({
+      success: true,
+      notificationId: result.id,
+    });
   } catch (error) {
-    console.error("Query error:", error);
-    logAndSendError(error, __dirname);
-    res.status(500).json({ error: "Failed to execute query" });
+    console.error("Notification error:", error);
+
+    logAndSendError(error);
+
+    res.status(500).json({ error: "Failed to send notification" });
   }
 });
 
 const PORT = 4002;
 app.listen(PORT, () => {
-  console.log(`Database Service API running on port ${PORT}`);
-  console.log(`Try GET: http://localhost:${PORT}/api/health`);
+  console.log(`API Gateway running on port ${PORT}`);
+  console.log(`Try GET: http://localhost:${PORT}/api/users/123/data`);
 });

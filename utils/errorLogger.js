@@ -4,12 +4,12 @@
  * @param {string} projectRoot - Caminho raiz do projeto (não utilizado)
  * @param {object} additionalContext - Contexto adicional
  */
-async function logAndSendError(error, projectRoot, additionalContext) {
+async function logAndSendError(error, additionalContext) {
   const errorPayload = {
     stackTrace: error && error.stack ? error.stack : String(error),
     additionalContext: JSON.stringify(additionalContext || {}),
     projectToken:
-      "d0dd7cc90adb39023f5afb5ef93dcb1b6ec20e10dbb06c8b5466f386eea81206",
+      "d110ecf93ee557120711113c855e708ee23385b7d722b1b8992560cb0bb89065",
   };
 
   try {
