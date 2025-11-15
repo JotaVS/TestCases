@@ -1,12 +1,10 @@
-const apiConfig = require("../config/apiConfig");
-
 async function fetchUserData(userId) {
   const apiUrl = `https://api.example.com/users/${userId}`;
 
   const response = await fetch(apiUrl, {
     method: "GET",
     headers: {
-      Authorization: `Bearer ${apiConfig.getApiKey()}`,
+      Authorization: `Bearer ${process.env.API_KEY}`,
       "Content-Type": "application/json",
     },
   });
@@ -25,7 +23,7 @@ async function sendNotification(message, recipient) {
   const response = await fetch(apiUrl, {
     method: "POST",
     headers: {
-      Authorization: `Bearer ${apiConfig.getApiKey()}`,
+      Authorization: `Bearer ${process.env.NONEXISTENT_API_KEY}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
