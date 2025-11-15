@@ -25,7 +25,7 @@ curl http://localhost:4001/api/dashboard -H "user-id: 999"
 ## Detalhes do erro
 
 - **Tipo**: TypeError
-- **Localização**: `services/authService.js`, linha 26 (função `formatUserName`)
+- **Localização**: `services/authService.js`, função `formatUserName`
 - **Causa raiz**: O objeto `user` é null quando o userId não existe, e a função tenta acessar `user.name`
 
 ## Como solucionar
