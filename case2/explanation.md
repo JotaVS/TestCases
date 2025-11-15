@@ -19,7 +19,7 @@ curl http://localhost:4002/api/users/123/data
 ## Detalhes do erro
 
 - **Tipo**: TypeError
-- **Localização**: `config/apiConfig.js`, linha 2 (função `getApiKey`)
+- **Localização**: `config/apiConfig.js`, função `getApiKey`
 - **Causa raiz**: `process.env.API_KEY` é `undefined` e usado sem validação no header de autorização
 
 ## Como solucionar
